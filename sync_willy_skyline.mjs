@@ -305,6 +305,25 @@ async function main() {
   fs.writeFileSync(path.join(outDir, 'skyline-github-light.svg'), svg3D, 'utf-8');
   fs.writeFileSync(path.join(outDir, 'skyline-github-dark.svg'), svg3D, 'utf-8');
 
+  // Cache GitHub Stats & Top Langs SVGs locally so they never 404 or fail on camo
+  try {
+    console.log('Fetching live stats & top languages SVGs...');
+    const [statsRes, langsRes] = await Promise.all([
+      fetch('https://github-readme-stats.vercel.app/api?username=WillyEverGreen&show_icons=true&hide_border=true&title_color=1a7f37&icon_color=2da44e&text_color=24292f&bg_color=ffffff&rank_icon=github'),
+      fetch('https://github-readme-stats.vercel.app/api/top-langs?username=WillyEverGreen&layout=compact&hide_border=true&title_color=1a7f37&text_color=24292f&bg_color=ffffff')
+    ]);
+    if (statsRes.ok) {
+      const statsSvg = await statsRes.text();
+      if (statsSvg.includes('<svg')) fs.writeFileSync(path.join(outDir, 'github-stats.svg'), statsSvg, 'utf-8');
+    }
+    if (langsRes.ok) {
+      const langsSvg = await langsRes.text();
+      if (langsSvg.includes('<svg')) fs.writeFileSync(path.join(outDir, 'top-langs.svg'), langsSvg, 'utf-8');
+    }
+  } catch (err) {
+    console.warn('Could not refresh stats cards, keeping existing SVGs:', err.message);
+  }
+
   console.log('Successfully generated 3D SVG with months on opposite front side & 2D SVG!');
 }
 

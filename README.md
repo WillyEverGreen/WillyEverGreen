@@ -24,17 +24,7 @@
 
 ### 👨‍💻 About Me
 
-```yaml
-name: Balkawade Sai Dipak
-handle: WillyEverGreen
-status: Third-year Engineering Student
-college: Fr. Conceicao Rodrigues College of Engineering (CRCE)
-interests: [Web Development, Automation, Cloudflare Workers, Problem Solving]
-likes: [Chess ♟️, Building CLI tools & side projects, Learning new tech]
-languages: [TypeScript, JavaScript, Python, Dart, SQL, HTML/CSS]
-```
-
-- 🎓 **Student**: Third-year student at **Fr. Conceicao Rodrigues College of Engineering (CRCE)**.
+- 🎓 **Education**: Third-year Engineering Student at **Fr. Conceicao Rodrigues College of Engineering (CRCE)**
 - ♟️ **Likes & Hobbies**: Big **Chess** player — always down for a blitz or rapid match!
 - 💻 **Side Projects**: Love building handy developer tools, like [`Antigravity-Auto-Submitter`](https://github.com/WillyEverGreen/Antigravity-Auto-Submitter) and web scraping utilities like [`acon`](https://github.com/WillyEverGreen/acon).
 - 🛠️ **Tech Stack**: Working mainly with TypeScript, JavaScript, Python, Node.js, and Cloudflare Workers.
@@ -107,12 +97,12 @@ languages: [TypeScript, JavaScript, Python, Dart, SQL, HTML/CSS]
     <tr>
       <td align="center" valign="middle">
         <a href="https://github.com/WillyEverGreen">
-          <img src="https://github-readme-stats.vercel.app/api?username=WillyEverGreen&show_icons=true&hide_border=true&title_color=1a7f37&icon_color=2da44e&text_color=24292f&bg_color=ffffff&rank_icon=github" alt="WillyEverGreen's GitHub Stats" height="175" />
+          <img src="./github-stats.svg" alt="WillyEverGreen's GitHub Stats" height="175" />
         </a>
       </td>
       <td align="center" valign="middle">
         <a href="https://github.com/WillyEverGreen">
-          <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=WillyEverGreen&layout=compact&hide_border=true&title_color=1a7f37&text_color=24292f&bg_color=ffffff" alt="Top Languages" height="175" />
+          <img src="./top-langs.svg" alt="Top Languages" height="175" />
         </a>
       </td>
     </tr>
@@ -122,7 +112,7 @@ languages: [TypeScript, JavaScript, Python, Dart, SQL, HTML/CSS]
 
   <!-- GitHub Streak in Matching White Theme -->
   <a href="https://github.com/WillyEverGreen">
-    <img src="https://github-readme-streak-stats.herokuapp.com/?user=WillyEverGreen&theme=default&background=ffffff&border=d0d7de&stroke=1a7f37&ring=1a7f37&fire=1a7f37&currStreakNum=1a7f37&sideNums=24292f&currStreakLabel=1a7f37&sideLabels=57606a&dates=57606a&hide_border=false" alt="GitHub Streak" width="95%" />
+    <img src="./streak-stats.svg" alt="GitHub Streak" width="95%" />
   </a>
 
 </div>

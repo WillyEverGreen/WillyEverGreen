@@ -32,6 +32,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add skyline-willyevergreen.svg skyline-willyevergreen-3d.svg skyline-willyevergreen-2d.svg skyline-github-light.svg skyline-github-dark.svg github-contribution-grid-caterpillar.svg github-contribution-grid-caterpillar-dark.svg github-contribution-grid-snake.svg github-contribution-grid-snake-dark.svg
-          git commit -m "chore(profile): update live skyline and caterpillar contribution graphs [skip ci]" || exit 0
+          git add *.svg
+          git commit -m "chore(profile): update live skyline, caterpillar and stats graphs [skip ci]" || exit 0
           git push
