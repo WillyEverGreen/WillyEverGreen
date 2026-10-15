@@ -25,7 +25,7 @@
 ### 👨‍💻 About Me
 
 - 🎓 **Education**: Third-year Engineering Student at **Fr. Conceicao Rodrigues College of Engineering (CRCE)**
-- ♟️ **Likes & Hobbies**: Big **Chess** player — always down for a blitz or rapid match!
+- ♟️ **Likes & Hobbies**: **Chess** player, always down for a blitz or rapid match!
 - 💻 **Side Projects**: Love building handy developer tools, like [`Antigravity-Auto-Submitter`](https://github.com/WillyEverGreen/Antigravity-Auto-Submitter) and web scraping utilities like [`acon`](https://github.com/WillyEverGreen/acon).
 - 🛠️ **Tech Stack**: Working mainly with TypeScript, JavaScript, Python, Node.js, and Cloudflare Workers.
 - 📬 **Let's Connect**: Feel free to reach out to collaborate on projects or play a game of chess!
