@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WillyEverGreen · Contribution Skyline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card-bg: #ffffff;
+      --card-border: #d0d7de;
+      --text: #1f2328;
+      --text-muted: #656d76;
+      --green: #1a7f37;
+      --link: #0969da;
+      --border: #d0d7de;
+      --toggle-bg: #f6f8fa;
+      --toggle-active: #ffffff;
+      --shadow: 0 1px 3px rgba(31, 35, 40, 0.12), 0 8px 24px rgba(66, 74, 83, 0.12);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --card-border: #30363d;
+      --text: #f0f6fc;
+      --text-muted: #8b949e;
+      --green: #39d353;
+      --link: #58a6ff;
+      --border: #30363d;
+      --toggle-bg: #21262d;
+      --toggle-active: #30363d;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 980px;
+      position: relative;
+    }
+
+    /* Container Box matching component */
+    .skyline-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    /* Header */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .title strong {
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* 2D / 3D Segmented Control */
+    .view-toggle {
+      display: inline-flex;
+      background: var(--toggle-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px;
+    }
+
+    .toggle-opt {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .toggle-opt.active {
+      background: var(--toggle-active);
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .theme-toggle-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* Canvas Stage */
+    .stage-wrapper {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .stage-wrapper:active {
+      cursor: grabbing;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Floating Stats Cards matching screenshot */
+    .floating-card {
+      position: absolute;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .upper-right-card {
+      top: 10px;
+      right: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+
+    .lower-left-card {
+      bottom: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .stat-badge-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      display: flex;
+      gap: 28px;
+      box-shadow: var(--shadow);
+      pointer-events: auto;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .big-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1.1;
+      font-feature-settings: 'tnum';
+    }
+
+    .big-num span {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-left: 3px;
+    }
+
+    .col-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    .col-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    .avg-line {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .avg-line strong {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-link {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline;
+    }
+
+    .legend-box {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .legend-box span {
+      margin: 0 4px;
+    }
+
+    .swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* Tooltip */
+    #tooltip {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      z-index: 50;
+      background: #24292f;
+      color: #ffffff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: translate(-50%, -130%);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <div class="skyline-box">
+      
+      <!-- Top Bar -->
+      <div class="top-header">
+        <div class="title">
+          <strong id="hdr-total">684</strong> contributions in the last year
+        </div>
+        <div class="header-actions">
+          <div class="view-toggle">
+            <button id="btn-2d" class="toggle-opt" onclick="setView('2d')">2D</button>
+            <button id="btn-3d" class="toggle-opt active" onclick="setView('3d')">3D</button>
+          </div>
+          <button class="theme-toggle-btn" onclick="toggleTheme()">🌓 Theme</button>
+        </div>
+      </div>
+
+      <!-- Canvas Stage -->
+      <div class="stage-wrapper" id="stage">
+        <canvas id="skyline-canvas"></canvas>
+
+        <div id="tooltip"></div>
+
+        <!-- Upper Right: Contributions Card -->
+        <div class="floating-card upper-right-card" id="card-contrib">
+          <div class="card-title">Contributions</div>
+          <div class="stat-badge-box">
+            <div class="col">
+              <div class="big-num" id="stat-total">684</div>
+              <div class="col-label">Total</div>
+              <div class="col-sub">Oct 12 → Oct 15</div>
+            </div>
+            <div class="col">
+              <div class="big-num" id="stat-best">50</div>
+              <div class="col-label">Best day</div>
+              <div class="col-sub" id="stat-best-date">Aug 27</div>
+            </div>
+          </div>
+          <div class="avg-line">
+            Average: <strong id="stat-avg">1.85</strong> / day
+          </div>
+        </div>
+
+        <!-- Lower Left: Streaks Card -->
+        <div class="floating-card lower-left-card" id="card-streaks">
+          <div class="card-title">Streaks</div>
+          <div class="stat-badge-box">
+            <div class="col">
+              <div class="big-num"><span id="stat-longest">9</span><span>days</span></div>
+              <div class="col-label">Longest</div>
+              <div class="col-sub">Oct 7 → Oct 15</div>
+            </div>
+            <div class="col">
+              <div class="big-num"><span id="stat-current">9</span><span>days</span></div>
+              <div class="col-label">Current</div>
+              <div class="col-sub">Oct 7 → Today</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bar (Removed Learn how we count link) -->
+      <div class="footer-bar" style="justify-content: flex-end;">
+        <div class="legend-box">
+          <span>Less</span>
+          <span class="swatch" id="sw-0"></span>
+          <span class="swatch" id="sw-1"></span>
+          <span class="swatch" id="sw-2"></span>
+          <span class="swatch" id="sw-3"></span>
+          <span class="swatch" id="sw-4"></span>
+          <span>More</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // GitHub palettes matching screenshot
+    const PALETTES = {
+      light: {
+        bg: '#ffffff',
+        fg: [31, 35, 40],
+        swatches: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+        faces: [
+          { top: [235, 237, 240], left: [208, 215, 222], right: [175, 184, 193] },
+          { top: [155, 233, 168], left: [123, 201, 111], right: [87, 168, 78] },
+          { top: [64, 196, 99],   left: [48, 161, 78],   right: [35, 134, 54] },
+          { top: [48, 161, 78],   left: [35, 134, 54],   right: [25, 108, 46] },
+          { top: [33, 110, 57],   left: [25, 97, 39],    right: [17, 68, 27] }
+        ]
+      },
+      dark: {
+        bg: '#0d1117',
+        fg: [240, 246, 252],
+        swatches: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+        faces: [
+          { top: [22, 27, 34],   left: [17, 21, 27],   right: [13, 17, 23] },
+          { top: [14, 68, 41],   left: [10, 48, 29],   right: [6, 32, 19] },
+          { top: [0, 109, 50],   left: [0, 84, 39],    right: [0, 61, 28] },
+          { top: [38, 166, 65],  left: [30, 132, 52],  right: [22, 101, 40] },
+          { top: [57, 211, 83],  left: [45, 176, 67],  right: [34, 135, 52] }
+        ]
+      }
+    };
+
+    let isDark = false;
+    function updateSwatches() {
+      const sw = isDark ? PALETTES.dark.swatches : PALETTES.light.swatches;
+      for (let i = 0; i < 5; i++) {
+        document.getElementById('sw-' + i).style.background = sw[i];
+      }
+    }
+    updateSwatches();
+
+    function toggleTheme() {
+      isDark = !isDark;
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      updateSwatches();
+    }
+
+    // Mathematical routines from contribution-skyline.tsx
+    const DAY_MS = 86400000;
+    const clamp01 = (v) => (v > 0 ? (v < 1 ? v : 1) : 0);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const easeInOutCubic = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+    const easeOutCubic = (x) => 1 - Math.pow(1 - clamp01(x), 3);
+
+    // Seeded generator matching screenshot's 4,116 commits
+    function generateYearData() {
+      const cells = [];
+      let total = 4116;
+      let maxCount = 54;
+      // 52 weeks x 7 days
+      for (let w = 0; w < 52; w++) {
+        for (let d = 0; d < 7; d++) {
+          const progress = w / 52;
+          let baseHeat = 0.45 + Math.sin(progress * Math.PI * 3) * 0.25;
+          let count = Math.random() < 0.85 ? Math.floor(Math.random() * (baseHeat * 25) + 1) : 0;
+          if (w === 38 && d === 2) count = 54; // Best day: Sep 23
+          cells.push({ week: w, day: d, count });
+        }
+      }
+      return { cells, total, best: maxCount, maxCount };
+    }
+
+    const model = generateYearData();
+    const { cells, maxCount } = model;
+
+    // Levels
+    cells.forEach((c) => {
+      c.level = c.count === 0 ? 0 : c.count < 10 ? 1 : c.count < 22 ? 2 : c.count < 38 ? 3 : 4;
+    });
+
+    // Camera Constants
+    const YAW_3D = Math.PI / 4;
+    const ELEV_3D = (34 * Math.PI) / 180;
+    function getCamera(e, dYaw = 0, dElev = 0) {
+      const yaw = lerp(0, YAW_3D + dYaw, e);
+      const elev = lerp(Math.PI / 2, ELEV_3D + dElev, e);
+      return { cs: Math.cos(yaw), sn: Math.sin(yaw), se: Math.sin(elev), ce: Math.cos(elev) };
+    }
+
+    const canvas = document.getElementById('skyline-canvas');
+    const ctx = canvas.getContext('2d');
+    const stage = document.getElementById('stage');
+    const tooltip = document.getElementById('tooltip');
+
+    let currentView = '3d';
+    let t = 1;
+    let targetT = 1;
+    let dYaw = 0, dElev = 0;
+    let targetYaw = 0, targetElev = 0;
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let hoveredIdx = -1;
+
+    function setView(v) {
+      currentView = v;
+      targetT = v === '3d' ? 1 : 0;
+      document.getElementById('btn-2d').classList.toggle('active', v === '2d');
+      document.getElementById('btn-3d').classList.toggle('active', v === '3d');
+      if (v === '2d') {
+        targetYaw = 0;
+        targetElev = 0;
+      }
+    }
+
+    let W = 0, H = 0, dpr = 1;
+    function resize() {
+      W = stage.clientWidth;
+      H = stage.clientHeight;
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Mouse drag orbit
+    stage.addEventListener('mousedown', (e) => {
+      if (currentView !== '3d') return;
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        targetYaw += dx * 0.005;
+        targetElev += dy * 0.004;
+        startX = e.clientX;
+        startY = e.clientY;
+      } else {
+        const rect = canvas.getBoundingClientRect();
+        checkHit(e.clientX - rect.left, e.clientY - rect.top);
+      }
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+    stage.addEventListener('dblclick', () => { targetYaw = 0; targetElev = 0; });
+
+    const sortedOrder = Array.from({ length: cells.length }, (_, i) => i);
+    const polyCache = [];
+
+    function checkHit(mx, my) {
+      let hit = -1;
+      for (let k = sortedOrder.length - 1; k >= 0; k--) {
+        const i = sortedOrder[k];
+        const p = polyCache[i];
+        if (p && pointInQuad(p, mx, my)) {
+          hit = i;
+          break;
+        }
+      }
+      if (hit !== hoveredIdx) {
+        hoveredIdx = hit;
+        if (hit >= 0) {
+          const c = cells[hit];
+          tooltip.innerHTML = `<strong>${c.count} contributions</strong> on Week ${c.week + 1}, Day ${c.day + 1}`;
+          tooltip.style.display = 'block';
+          tooltip.style.left = mx + 'px';
+          tooltip.style.top = my + 'px';
+        } else {
+          tooltip.style.display = 'none';
+        }
+      }
+    }
+
+    function pointInQuad(p, x, y) {
+      let sign = 0;
+      for (let k = 0; k < 4; k++) {
+        const ax = p[k * 2], ay = p[k * 2 + 1];
+        const bx = p[((k + 1) % 4) * 2], by = p[((k + 1) % 4) * 2 + 1];
+        const cross = (bx - ax) * (y - ay) - (by - ay) * (x - ax);
+        if (Math.abs(cross) < 1e-9) continue;
+        const s = cross > 0 ? 1 : -1;
+        if (sign === 0) sign = s;
+        else if (s !== sign) return false;
+      }
+      return sign !== 0;
+    }
+
+    const monthLabels = [
+      { week: 0, label: 'Oct' },
+      { week: 3, label: 'Nov' },
+      { week: 8, label: 'Dec' },
+      { week: 12, label: 'Jan' },
+      { week: 16, label: 'Feb' },
+      { week: 20, label: 'Mar' },
+      { week: 25, label: 'Apr' },
+      { week: 29, label: 'May' },
+      { week: 34, label: 'Jun' },
+      { week: 38, label: 'Jul' },
+      { week: 42, label: 'Aug' },
+      { week: 47, label: 'Sep' },
+      { week: 51, label: 'Oct' }
+    ];
+
+    function render() {
+      t += (targetT - t) * 0.08;
+      dYaw += (targetYaw - dYaw) * 0.1;
+      dElev += (targetElev - dElev) * 0.1;
+
+      const e = easeInOutCubic(t);
+      const cam = getCamera(e, dYaw, dElev);
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+
+      const palTheme = isDark ? PALETTES.dark : PALETTES.light;
+
+      // Diagonal positioning across center
+      const s3D = Math.min((W - 120) / (52 * 1.1), (H - 80) / 10) * 1.15;
+      const s2D = Math.min((W - 140) / 52, (H - 120) / 7);
+      const s = lerp(s2D, s3D, e);
+
+      const ox = lerp((W - 52 * s) / 2, W * 0.16, e);
+      const oy = lerp((H - 7 * s) / 2 + 10, H * 0.42, e);
+
+      const px = (x, y) => ox + (x * cam.cs - y * cam.sn) * s;
+      const py = (x, y, z) => oy + ((x * cam.sn + y * cam.cs) * cam.se - z * cam.ce) * s;
+
+      // Draw Month Labels on opposite front edge in 3D, and above columns in 2D
+      ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+      ctx.fillStyle = isDark ? '#8b949e' : '#656d76';
+      ctx.textAlign = 'center';
+      for (const m of monthLabels) {
+        const mx = lerp(px(m.week + 0.5, -0.6), px(m.week + 0.5, 7.4), e);
+        const my = lerp(py(m.week + 0.5, -0.6, 0) - 6, py(m.week + 0.5, 7.4, 0) + 14, e);
+        ctx.fillText(m.label, mx, my);
+      }
+
+      // Back-to-front sorting
+      sortedOrder.sort((a, b) => {
+        const da = (cells[a].week + 0.5) * cam.sn + (cells[a].day + 0.5) * cam.cs;
+        const db = (cells[b].week + 0.5) * cam.sn + (cells[b].day + 0.5) * cam.cs;
+        return da - db;
+      });
+
+      const w = 0.82;
+
+      for (let k = 0; k < cells.length; k++) {
+        const i = sortedOrder[k];
+        const c = cells[i];
+
+        // Height calculation identical to component
+        const maxH = c.count > 0 ? 0.4 + Math.pow(c.count / maxCount, 0.85) * 6.5 : 0.2;
+        const z = maxH * e;
+
+        const x0 = c.week;
+        const y0 = c.day;
+        const x1 = x0 + w;
+        const y1 = y0 + w;
+
+        const p00 = [px(x0, y0), py(x0, y0, z)];
+        const p10 = [px(x1, y0), py(x1, y0, z)];
+        const p11 = [px(x1, y1), py(x1, y1, z)];
+        const p01 = [px(x0, y1), py(x0, y1, z)];
+
+        const b01 = [px(x0, y1), py(x0, y1, 0)];
+        const b11 = [px(x1, y1), py(x1, y1, 0)];
+        const b10 = [px(x1, y0), py(x1, y0, 0)];
+
+        polyCache[i] = [p00[0], p00[1], p10[0], p10[1], p11[0], p11[1], p01[0], p01[1]];
+
+        const faceCol = palTheme.faces[c.level];
+        const isHovered = (hoveredIdx === i);
+
+        // Draw side faces if 3D
+        if (e > 0.05 && z > 0.15) {
+          // Left face
+          ctx.beginPath();
+          ctx.moveTo(p01[0], p01[1]);
+          ctx.lineTo(p11[0], p11[1]);
+          ctx.lineTo(b11[0], b11[1]);
+          ctx.lineTo(b01[0], b01[1]);
+          ctx.closePath();
+          ctx.fillStyle = `rgb(${faceCol.left[0]}, ${faceCol.left[1]}, ${faceCol.left[2]})`;
+          ctx.fill();
+
+          // Right face
+          ctx.beginPath();
+          ctx.moveTo(p10[0], p10[1]);
+          ctx.lineTo(p11[0], p11[1]);
+          ctx.lineTo(b11[0], b11[1]);
+          ctx.lineTo(b10[0], b10[1]);
+          ctx.closePath();
+          ctx.fillStyle = `rgb(${faceCol.right[0]}, ${faceCol.right[1]}, ${faceCol.right[2]})`;
+          ctx.fill();
+        }
+
+        // Top face
+        ctx.beginPath();
+        ctx.moveTo(p00[0], p00[1]);
+        ctx.lineTo(p10[0], p10[1]);
+        ctx.lineTo(p11[0], p11[1]);
+        ctx.lineTo(p01[0], p01[1]);
+        ctx.closePath();
+        ctx.fillStyle = isHovered ? '#4ade80' : `rgb(${faceCol.top[0]}, ${faceCol.top[1]}, ${faceCol.top[2]})`;
+        ctx.fill();
+        ctx.strokeStyle = isHovered ? '#1f2328' : isDark ? '#30363d' : '#d0d7de';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    render();
+  </script>
+</body>
+</html>

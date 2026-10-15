@@ -1,0 +1,37 @@
+name: Update 3D Contribution Skyline
+
+on:
+  schedule:
+    - cron: '0 18 * * *' # Runs at midnight UTC every day
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  sync-skyline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch Live Data & Generate 3D Skyline & Snake Grid
+        run: |
+          node sync_willy_skyline.mjs
+          node generate_snake_svg.mjs
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skyline-willyevergreen.svg skyline-willyevergreen-3d.svg skyline-willyevergreen-2d.svg skyline-github-light.svg skyline-github-dark.svg github-contribution-grid-caterpillar.svg github-contribution-grid-caterpillar-dark.svg github-contribution-grid-snake.svg github-contribution-grid-snake-dark.svg
+          git commit -m "chore(profile): update live skyline and caterpillar contribution graphs [skip ci]" || exit 0
+          git push
