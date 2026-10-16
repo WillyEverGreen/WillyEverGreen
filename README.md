@@ -14,8 +14,8 @@
   <p align="center">
     <img src="https://img.shields.io/badge/Student-Fr.%20CRCE%20(Third%20Year)-059669?style=for-the-badge&logo=googleclassroom&logoColor=white" alt="Student" />
     <img src="https://img.shields.io/badge/Hobbies-Chess%20%E2%99%9F%EF%B8%8F-10b981?style=for-the-badge&logo=lichess&logoColor=white" alt="Chess" />
-    <img src="https://img.shields.io/badge/GitHub-63%20Public%20Repos-047857?style=for-the-badge&logo=github&logoColor=white" alt="Repos" />
-    <img src="https://img.shields.io/badge/Activity-684%20Contributions-166534?style=for-the-badge&logo=git&logoColor=white" alt="Contributions" />
+    <a href="https://sai-folio.vercel.app"><img src="https://img.shields.io/badge/Portfolio-sai--folio.vercel.app-047857?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" /></a>
+    <img src="https://img.shields.io/github/followers/WillyEverGreen?label=Followers&style=for-the-badge&logo=github&logoColor=white&color=166534" alt="Followers" />
   </p>
 
 </div>
@@ -28,6 +28,7 @@
 - ♟️ **Likes & Hobbies**: **Chess** player, always down for a blitz or rapid match!
 - 💻 **Side Projects**: Love building handy developer tools, like [`Antigravity-Auto-Submitter`](https://github.com/WillyEverGreen/Antigravity-Auto-Submitter) and web scraping utilities like [`acon`](https://github.com/WillyEverGreen/acon).
 - 🛠️ **Tech Stack**: Working mainly with TypeScript, JavaScript, Python, Node.js, and Cloudflare Workers.
+- 🌐 **Portfolio**: [sai-folio.vercel.app](https://sai-folio.vercel.app)
 - 📬 **Let's Connect**: Feel free to reach out to collaborate on projects or play a game of chess!
 
 ---
@@ -47,19 +48,24 @@
 
 ---
 
-### 🚀 Featured Repositories
+### 🚀 Featured Projects
 
 <div align="center">
 
-| Project | Description | Primary Tech |
-| :--- | :--- | :--- |
-| **[acon](https://github.com/WillyEverGreen/acon)** ⭐ `45+` | The intelligence layer for any web scraper. Pairs with Scrapling, Playwright, or httpx to crawl smarter. | `Python` `Playwright` `Scrapling` |
-| **[Antigravity-Auto-Submitter](https://github.com/WillyEverGreen/Antigravity-Auto-Submitter)** | Fast CLI daemon for Google Antigravity IDE automating tool approvals, CDP monitoring & cleanup. | `JavaScript` `Node.js` `CDP` |
-| **[clip](https://github.com/WillyEverGreen/clip)** | Ephemeral text & file sharing platform running on Cloudflare Workers and KV storage. | `TypeScript` `Cloudflare` `Edge` |
-| **[HeadLock](https://github.com/WillyEverGreen/HeadLock)** | Self-hosted headless browser API running on Hugging Face Spaces & Docker containers. | `JavaScript` `Puppeteer` `Docker` |
-| **[LEGAL_AI](https://github.com/WillyEverGreen/LEGAL_AI)** | AI-powered legal document analyzer, automated contract review, and intelligence extraction. | `TypeScript` `React` `LLMs` |
-| **[ReCode](https://github.com/WillyEverGreen/ReCode)** | Algorithmic pattern analyzer and LeetCode solution caching engine with Redis and MongoDB. | `JavaScript` `Redis` `MongoDB` |
-| **[CN Firewall Simulator](https://github.com/WillyEverGreen/CN_mini-project-)** | Interactive Layer 3/4 stateful firewall simulator with conntrack inspection & L7 deflection. | `JavaScript` `Networking` `Canvas` |
+| Project | What it does | Stack | Live |
+| :--- | :--- | :--- | :--- |
+| **[acon](https://github.com/WillyEverGreen/acon)** ⭐ `45+` | The intelligence layer for any web scraper. Maps a site's structure so crawlers stop early and waste less. | Python, Playwright | [PyPI](https://pypi.org/project/acon-intel) |
+| **[ReCode](https://github.com/WillyEverGreen/ReCode)** | Turns raw LeetCode submissions into structured revision notes, with AI analysis and Redis/MongoDB caching. | TypeScript, React, MongoDB | [recode.sbs](https://recode.sbs) |
+| **[LEGAL_AI](https://github.com/WillyEverGreen/LEGAL_AI)** | AI assistant for Indian law: BNS vs IPC comparison, document analysis and case research. | TypeScript, FastAPI, NVIDIA NIM | [Open](https://legal-ai-gateway.onrender.com) |
+| **[clip](https://github.com/WillyEverGreen/clip)** | Temporary text and file sharing with encryption and a real-time live pad, on Cloudflare Workers. | TypeScript, Cloudflare | [clip.foo.ng](https://clip.foo.ng) |
+| **[HeadLock](https://github.com/WillyEverGreen/HeadLock)** | Self-hosted headless browser API for scraping, screenshots and PDFs, free on Hugging Face Spaces. | JavaScript, Playwright, Docker | [Open](https://willyevergreen-headlock.hf.space) |
+| **[Loop_1.0](https://github.com/WillyEverGreen/Loop_1.0)** | Autonomous SRE platform for monitoring, incident prediction and automated remediation. | TypeScript, React | [Open](https://loop-1-0.vercel.app) |
+| **[JOURNI-AI](https://github.com/WillyEverGreen/JOURNI-AI)** | AI trip planner that builds day-by-day itineraries and budgets. | React, Firebase, NVIDIA NIM | [Open](https://journi-ai-ai-trip-planner-anzy.vercel.app) |
+| **[Space_Scope](https://github.com/WillyEverGreen/Space_Scope)** | Real-time satellite tracking, space weather and an AR sky viewer. | TypeScript, React | [Open](https://space-scope-lqli.vercel.app) |
+| **[Stateful-Firewall-Simulator](https://github.com/WillyEverGreen/Stateful-Firewall-Simulator)** | Interactive Layer 3/4 stateful firewall simulator with conntrack inspection. | JavaScript | [Open](https://cnmini-project.vercel.app) |
+| **[css-virtual-lab](https://github.com/WillyEverGreen/css-virtual-lab)** | Browser-based cryptography lab with cipher simulations and MitM scenarios. | JavaScript, Web Crypto | [Open](https://virtual-cryptography-lab.vercel.app) |
+| **[8086](https://github.com/WillyEverGreen/8086)** | 8086 microprocessor simulator with step execution and register visualization. | TypeScript, React, GSAP | [Open](https://8086-jade.vercel.app) |
+| **[Antigravity-Auto-Submitter](https://github.com/WillyEverGreen/Antigravity-Auto-Submitter)** | CLI daemon that automates tool approvals and cleanup for the Antigravity IDE. | JavaScript, CDP | - |
 
 </div>
 
@@ -76,9 +82,6 @@
   </p>
 
   <p align="center">
-    <a href="https://willyevergreen.github.io/">
-      <img src="https://img.shields.io/badge/Launch-Live%20Interactive%20Skyline-059669?style=for-the-badge&logo=react&logoColor=white" alt="Launch Live 3D Skyline" />
-    </a>
     <a href="https://github.com/WillyEverGreen">
       <img src="https://img.shields.io/badge/Daily%20Sync-Automated%20GitHub%20Action-10b981?style=for-the-badge&logo=githubactions&logoColor=white" alt="Daily Sync" />
     </a>
