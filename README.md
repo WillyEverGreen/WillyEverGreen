@@ -1,7 +1,7 @@
 <div align="center">
 
   <!-- Header Banner -->
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=047857,10b981,059669&height=210&section=header&text=Balkawade%20Sai%20Dipak&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=36" width="100%" alt="Balkawade Sai Dipak Header" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=059669&height=210&section=header&text=Balkawade%20Sai%20Dipak&fontSize=38&fontColor=ffffff&animation=fadeIn&fontAlignY=36" width="100%" alt="Balkawade Sai Dipak Header" />
 
   <!-- Animated Typing Subtitle -->
   <p align="center">
